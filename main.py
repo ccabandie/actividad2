@@ -1,21 +1,42 @@
-clients = [
-    " Ana López ", "Pedro Gómez", "maria martínez", "Pedro Gómez ", "",
-    " Luis Rodríguez ", None, "ana lópez", "JUAN PÉREZ", "MARTA SUÁREZ",
-    "luis rodríguez", "maría martínez ", " claudia torres", "CLAUDIA TORRES",
-    " ", "pedro gómez", "Juan Pérez", None, "Ricardo Fernández", "LAURA RAMOS",
-    "carlos mendes", "RICARDO FERNÁNDEZ ", " Laura ramos", "CARLOS MENDES",
-    "alejandro gonzález", " ALEJANDRO GONZÁLEZ ", "Patricia Vega",
-    "patricia VEGA", "Andrés Ocampo", " andrés ocampo", "Monica Herrera",
-    "MONICA HERRERA ", "gabriela ruíz", "Gabriela Ruíz", "sandra morales",
-    "SANDRA MORALES", "miguel ángel", "Miguel Ángel ", " Damián Castillo",
-    "Damián Castillo ", None, "", " "
+from src.funciones import simulate_games
+# Crear instancia de Funciones
+rounds = [
+{
+'Shadow': {'kills': 2, 'assists': 1, 'deaths': True},
+'Blaze': {'kills': 1, 'assists': 0, 'deaths': False},
+'Viper': {'kills': 1, 'assists': 2, 'deaths': True},
+'Frost': {'kills': 0, 'assists': 1, 'deaths': False},
+'Reaper': {'kills': 1, 'assists': 1, 'deaths': False}
+},
+{
+'Shadow': {'kills': 0, 'assists': 2, 'deaths': False},
+'Blaze': {'kills': 2, 'assists': 0, 'deaths': True},
+'Viper': {'kills': 1, 'assists': 1, 'deaths': False},
+'Frost': {'kills': 2, 'assists': 1, 'deaths': True},
+'Reaper': {'kills': 0, 'assists': 1, 'deaths': False}
+},
+{
+'Shadow': {'kills': 1, 'assists': 0, 'deaths': False},
+'Blaze': {'kills': 2, 'assists': 2, 'deaths': True},
+'Viper': {'kills': 1, 'assists': 1, 'deaths': True},
+'Frost': {'kills': 0, 'assists': 1, 'deaths': False},
+'Reaper': {'kills': 1, 'assists': 1, 'deaths': False}
+},
+{
+'Shadow': {'kills': 2, 'assists': 1, 'deaths': False},
+'Blaze': {'kills': 1, 'assists': 0, 'deaths': True},
+'Viper': {'kills': 0, 'assists': 2, 'deaths': False},
+'Frost': {'kills': 1, 'assists': 1, 'deaths': True},
+'Reaper': {'kills': 1, 'assists': 1, 'deaths': False}
+},
+{
+'Shadow': {'kills': 1, 'assists': 2, 'deaths': True},
+'Blaze': {'kills': 0, 'assists': 1, 'deaths': False},
+'Viper': {'kills': 2, 'assists': 0, 'deaths': True},
+'Frost': {'kills': 1, 'assists': 1, 'deaths': False},
+'Reaper': {'kills': 1, 'assists': 1, 'deaths': True}
+}
 ]
-def clean_clients(clients):
-    """Eliminar espacios en blanco, convertir a título, eliminar duplicados y valores nulos."""
-    # Eliminar espacios extra y convertir a título
-    cleaned_clients = [client.strip().title() for client in clients if client]
-    
-    # Eliminar duplicados
-    cleaned_clients = list(set(cleaned_clients))
-    
-    return cleaned_clients
+
+# Ejecutar simulación
+stats_final = simulate_games(rounds)

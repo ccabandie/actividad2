@@ -1,4 +1,4 @@
-from src.funciones import simulate_games
+from funciones import simulate_games
 # Crear instancia de Funciones
 rounds = [
 {

@@ -1,6 +1,6 @@
 # Definición de funciones
 def start_count(players):
-    """Crea un diccionario y lo inicializa el diccionario de estadisticas y puntajes."""
+    """Inicializa el diccionario de estadisticas y puntajes."""
     stats = {}
     for player in players:
         stats[player] = {
@@ -11,6 +11,7 @@ def start_count(players):
             'total_points': 0
             }
     return stats
+
 def calculate_points_round(data_player):
     """calcula el puntaje de cada jugador en la ronda"""
     kills = data_player['kills']
@@ -18,6 +19,7 @@ def calculate_points_round(data_player):
     deaths = -1 if data_player['deaths'] else 0
     
     return kills * 3 + assists * 1 + deaths
+
 def sum_points (stats, player, kills, assists, deaths, points):
     """Recibe el diccionario de estadisticas, el jugador, kills, assists, deaths y puntos y lo actualiza."""
     stats[player]['kills'] += kills
@@ -27,10 +29,10 @@ def sum_points (stats, player, kills, assists, deaths, points):
 
 def define_mvp(round_scores):                          
     """Determina el MVP de la ronda"""
-
     return max(round_scores.items(), key=lambda x: x[1]) 
+
 def  show_ranking(stats):
-    """Ordena a los jugadores por total_points y muestra una tabla."""
+    """Ordena a los jugadores por puntos totales y muestra una tabla."""
     print("\n--- Ranking ---")
     print("Jugador   | Kills | Asistencias | Muertes | MVPs | Puntos")
     print("-" * 50)
@@ -40,22 +42,21 @@ def  show_ranking(stats):
 
 # Función principal
 def simulate_games(rounds):
-    players = list(rounds[0].keys())                   #hago una lista de jugadores
-    stats = start_count (players)                      #invoco a la función que me va a ir calculando los puntujes por ronda 
-    
-    for i, round in enumerate(rounds, 1):              #itero cada una de las rondas
+    players = list(rounds[0].keys())                   
+    stats = start_count (players)                          
+    for i, round in enumerate(rounds, 1):              
         print(f"\n--- Ronda {i} ---")
-        round_scores = {}                              #inicializo el diccionario q me va a guardar jugador/puntaje  
+        round_scores = {}                               
         
-        for player in players:                         #itero por jugador en la ronda i 
-            data = round[player]                       #data guarda en un diccionario los valores en la ronda i del jugador player
-            points = calculate_points_round(data)      #calcula el puntaje del jugador player en la ronda i
-            round_scores[player] = points              #guardo el puntaje que obtuvo el jugador player en la ronda i, es un dicc donde  las claves son nombres de jugadores y los valores son sus puntajes en esa ronda
-            sum_points (stats, player, data['kills'], data['assists'], data['deaths'], points) #invoco la función que me va a ir actualizando el diccionario start
+        for player in players:                         
+            data = round[player]                       
+            points = calculate_points_round(data)      
+            round_scores[player] = points              
+            sum_points (stats, player, data['kills'], data['assists'], data['deaths'], points) 
             
-        mvp, points_mvp = define_mvp(round_scores)    #Esto es para calcular el mejor jugador del partido, la función me devuelve una tupla (player, points).
-        stats[mvp]['mvp_count'] += 1                  # cuanta las veces que un jugador salio mvp
-        print(f" MVP de la Ronda: {mvp} (Puntos: {points_mvp})")             #imprime el mvp y su puntaje
+        mvp, points_mvp = define_mvp(round_scores)    
+        stats[mvp]['mvp_count'] += 1                  
+        print(f" MVP de la Ronda: {mvp} (Puntos: {points_mvp})")             
         
         show_ranking(stats)      
     

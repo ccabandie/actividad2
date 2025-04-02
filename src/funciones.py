@@ -52,10 +52,10 @@ def simulate_games(rounds):
             data = round[player]                       
             points = calculate_points_round(data)      
             round_scores[player] = points              
-            sum_points (stats, player, data['kills'], data['assists'], data['deaths'], points) 
+            sum_points (stats, player, data['kills'], data['assists'], data['deaths'], points)  
             
         mvp, points_mvp = define_mvp(round_scores)    
-        stats[mvp]['mvp_count'] += 1                  
+        stats[mvp]['mvp_count'] += 1                   
         print(f" MVP de la Ronda: {mvp} (Puntos: {points_mvp})")             
         
         show_ranking(stats)      
